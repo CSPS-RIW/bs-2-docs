@@ -41,8 +41,9 @@ label {
   margin: 0 60px 0 60px;
 }
 
-textarea .input-container {
+.input-container {
   display: flex;
+  flex-direction: row;
   outline: 2px solid var(--main-text-color);
   border-radius: 10px;
   padding: 10px;
@@ -72,16 +73,16 @@ textarea .input-container {
   padding: 5px 25px;
 }
 .btn.one {
-  color: #43c4e8;
+  color: #4d4aff;
 }
 .btn.two {
-  color: #56aeff;
+  color: #4543e6;
 }
 .btn.three {
-  color: #436ce8;
+  color: #3a37bf;
 }
 .btn.four {
-  color: #4d4aff;
+  color: #262580;
 }
 .btn:hover {
   background-color: var(--secondary-btn-color);

@@ -1,7 +1,12 @@
 @use "../vars" as v;
+@use '../breakpoints' as b;
 
 .container {
     margin: 0 60px 0 60px;
+    width: 50em;
+    @include b.breakpoint(medium) {
+
+    }
 }
 
 .input-container {

@@ -69,23 +69,37 @@ label {
   gap: 0.5rem;
   color: var(--main-btn-text);
   background-color: var(--main-btn-color);
+  border: 0;
   border-radius: 10px;
   padding: 5px 25px;
 }
 .btn.one {
   color: #4d4aff;
 }
+.btn.one:hover {
+  background-color: #4d4aff;
+  color: var(--main-btn-color);
+}
 .btn.two {
   color: #4543e6;
+}
+.btn.two:hover {
+  background-color: #4543e6;
+  color: var(--main-btn-color);
 }
 .btn.three {
   color: #3a37bf;
 }
+.btn.three:hover {
+  background-color: #3a37bf;
+  color: var(--main-btn-color);
+}
 .btn.four {
   color: #262580;
 }
-.btn:hover {
-  background-color: var(--secondary-btn-color);
+.btn.four:hover {
+  background-color: #262580;
+  color: var(--main-btn-color);
 }
 .btn svg {
   fill: var(--main-text-color);

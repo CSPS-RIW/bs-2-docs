@@ -6,26 +6,36 @@
     gap: 0.5rem;
     color: v.$main-btn-text;
     background-color: v.$main-btn-color;
+    border: 0;
     border-radius: 10px;
     padding: 5px 25px;
     &.one {
-
-            color: #4d4aff;
+        color: #4d4aff;
+        &:hover {
+                background-color: #4d4aff;
+                color: v.$main-btn-color;
+        }
     }
     &.two {
-
-            color: #4543e6;
+        color: #4543e6;
+        &:hover {
+                background-color: #4543e6;
+                color: v.$main-btn-color;
+        }
     }
     &.three {
-
-            color: #3a37bf;
+        color: #3a37bf;
+        &:hover {
+                background-color: #3a37bf;
+                color: v.$main-btn-color;
+        }
     }
     &.four {
-
-            color: #262580;
-    }
-    &:hover {
-        background-color: v.$secondary-btn-color;
+        color: #262580;
+        &:hover {
+                background-color: #262580;
+                color: v.$main-btn-color;
+        }
     }
     svg {
         fill: v.$main-text-color;

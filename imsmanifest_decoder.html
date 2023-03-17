@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IMS Manifest Decoder</title>
+		<link rel="stylesheet" href="style.css" />
+		<link
+			rel="preload"
+			href="fonts/barlow-v12-latin-regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+			integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div id="bs2docui">
+				<h1>IMSCC XML DATA TO HTML OUTPUT</h1>
+				<div class="input-container">
+					<div class="flex-col">
+						<label for="xml_loadurl">Target XML URL:</label
+						><input
+							id="xml_loadurl"
+							type="text"
+							value="COR310-DEV-EN/imsmanifest.xml" />
+						<label for="xml_input">Loaded XML content: </label>
+						<textarea
+							name="main_input"
+							id="xml_input"
+							cols="30"
+							rows="10"></textarea>
+					</div>
+					<div class="flex-col panel">
+						<button
+							class="btn one"
+							onclick="javascript:fLoadXml();">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24">
+								<path
+									fill="currentColor"
+									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm-.5-3v7q0 .425.288.712q.287.288.712.288t.713-.288q.287-.287.287-.712V8q0-.425-.287-.713Q12.925 7 12.5 7h-2q-.425 0-.712.287Q9.5 7.575 9.5 8t.288.712Q10.075 9 10.5 9Z" />
+							</svg>
+							Load XML
+						</button>
+						<button
+							class="btn two"
+							onclick="javascript:fGenIndex();">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24">
+								<path
+									fill="currentColor"
+									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm2 5q.425 0 .713-.288Q15 16.425 15 16t-.287-.713Q14.425 15 14 15h-3v-2h2q.825 0 1.413-.588Q15 11.825 15 11V9q0-.825-.587-1.413Q13.825 7 13 7h-3q-.425 0-.712.287Q9 7.575 9 8t.288.712Q9.575 9 10 9h3v2h-2q-.825 0-1.412.587Q9 12.175 9 13v3q0 .425.288.712Q9.575 17 10 17Z" />
+							</svg>
+							Generate Index
+						</button>
+						<button
+							class="btn three"
+							onclick="javascript:fGenHtml();">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24">
+								<path
+									fill="currentColor"
+									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm-2 5h3q.825 0 1.413-.587Q15 15.825 15 15v-1.5q0-.65-.425-1.075Q14.15 12 13.5 12q.65 0 1.075-.425Q15 11.15 15 10.5V9q0-.825-.587-1.413Q13.825 7 13 7h-3q-.425 0-.712.287Q9 7.575 9 8t.288.712Q9.575 9 10 9h3v2h-1q-.425 0-.712.287Q11 11.575 11 12t.288.712Q11.575 13 12 13h1v2h-3q-.425 0-.712.287Q9 15.575 9 16t.288.712Q9.575 17 10 17Z" />
+							</svg>
+							Generate HTML
+						</button>
+						<button
+							class="btn four"
+							onclick="javascript:fFixHtml();">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24">
+								<path
+									fill="currentColor"
+									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm1 1v3q0 .425.288.712q.287.288.712.288t.713-.288Q15 16.425 15 16V8q0-.425-.287-.713Q14.425 7 14 7t-.712.287Q13 7.575 13 8v3h-2V8q0-.425-.287-.713Q10.425 7 10 7t-.712.287Q9 7.575 9 8v4q0 .425.288.712Q9.575 13 10 13Z" />
+							</svg>
+							"Fix" HTML (wait for everything to be loaded)
+						</button>
+						<div class="checkbox">
+							<input id="answerkeys" type="checkbox" /><label
+								for="answerkeys"
+								>Include answer keys?</label
+							>
+						</div>
+						<div class="checkbox">
+							<input
+								id="decorativeimages"
+								type="checkbox" /><label for="decorativeimages"
+								>Include decorative images?</label
+							>
+						</div>
+
+						<!-- <button onClick="javascript:location.reload();">Step 5-Refresh</button> -->
+
+						<div id="controls_options">
+							<!-- <p>[page selection invert BUTTON]</p> -->
+							<!-- <p>[override XML from textarea CHECKBOX]</p> -->
+							<!-- <p>[load css CHECKBOX]</p> -->
+							<div class="checkbox">
+								<input
+									id="bs2d_opt_loadcss"
+									type="checkbox"
+									checked /><label
+									>Attempt to retreive original
+									styling/CSS</label
+								>
+							</div>
+							<!-- <p>[override xml]</p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="generated_content"></div>
+			<div id="output"></div>
+		</div>
+		<script>
+			//Init vars
+			var indexArr = [];
+			var resArr = {};
+			var cssArr = [];
+			var localUrl = '';
+			var htmlResCounter = 0;
+			var htmlLoadedResCounter = 0;
+			var xmlManifest = '';
+			console.log('loading');
+
+			// 			let xmlInput = document.querySelector('#xml_input');
+
+			// 			xmlInput.value = `
+			// 			(XML Manifest will show here)
+			// COR310-DEV-EN/imsmanifest.xml
+			// COR101-DEV-FR/imsmanifest.xml
+			// FON301-DEV-FR/imsmanifest.xml
+			// FON304-DEV-EN/imsmanifest.xml
+			// 			`;
+			// 			console.log(xmlInput);
+
+			//Generate main index from XML data
+			function fGenIndex() {
+				//
+				xmlData = xmlManifest;
+				//Generate Resources
+				fGenRes(xmlData);
+				//Validation
+
+				//Parse
+				xmlParser = new DOMParser();
+				xmlDoc = xmlParser.parseFromString(xmlData, 'text/xml');
+
+				//Loop through first level organisation items
+				for (
+					var i = 0;
+					i <
+					xmlDoc.getElementsByTagName('organization')[0].children[0]
+						.children.length;
+					i++
+				) {
+					//Register Index elements
+					indexArr[i] = {};
+					indexArr[i].title =
+						xmlDoc.getElementsByTagName(
+							'organization',
+						)[0].children[0].children[i].children[0].textContent; //!Make sure it targets title title tag as opposed to first one
+					indexArr[i].items = [];
+					indexArr[i].identifier = xmlDoc
+						.getElementsByTagName('organization')[0]
+						.children[0].children[i].getAttributeNode(
+							'identifier',
+						).nodeValue;
+
+					//TMP Counter
+					var tCnt = 0;
+
+					//Loop through second level organisation items
+					for (
+						var ii = 0;
+						ii <
+						xmlDoc.getElementsByTagName('organization')[0]
+							.children[0].children[i].children.length;
+						ii++
+					) {
+						if (
+							xmlDoc.getElementsByTagName('organization')[0]
+								.children[0].children[i].children[ii]
+								.nodeName == 'title'
+						) {
+							//!Ignore, find better solution!
+						} else if (
+							xmlDoc.getElementsByTagName('organization')[0]
+								.children[0].children[i].children[ii]
+								.nodeName == 'item'
+						) {
+							//Check if third level
+							if (
+								xmlDoc
+									.getElementsByTagName('organization')[0]
+									.children[0].children[i].children[
+										ii
+									].getAttributeNode('identifierref') ==
+									null &&
+								xmlDoc
+									.getElementsByTagName('organization')[0]
+									.children[0].children[i].children[
+										ii
+									].getElementsByTagName('item').length > 0
+							) {
+								//Loop through third level organisation items
+								for (
+									var iii = 0;
+									iii <
+									xmlDoc.getElementsByTagName(
+										'organization',
+									)[0].children[0].children[i].children[ii]
+										.children.length;
+									iii++
+								) {
+									if (
+										xmlDoc.getElementsByTagName(
+											'organization',
+										)[0].children[0].children[i].children[
+											ii
+										].children[iii].nodeName != 'title'
+									) {
+										//Register 3rd level
+										indexArr[i].items[tCnt] = {
+											title: xmlDoc.getElementsByTagName(
+												'organization',
+											)[0].children[0].children[i]
+												.children[ii].children[iii]
+												.children[0].textContent,
+											identifier: xmlDoc
+												.getElementsByTagName(
+													'organization',
+												)[0]
+												.children[0].children[
+													i
+												].children[ii].children[
+													iii
+												].getAttribute('identifier'),
+											identifierref: xmlDoc
+												.getElementsByTagName(
+													'organization',
+												)[0]
+												.children[0].children[
+													i
+												].children[ii].children[
+													iii
+												].getAttribute('identifierref'),
+										};
+
+										tCnt++;
+									} else {
+										//2nLevelHolder
+									}
+								}
+							} else {
+								//Register 2nd level
+								indexArr[i].items[tCnt] = {
+									title: xmlDoc.getElementsByTagName(
+										'organization',
+									)[0].children[0].children[i].children[ii]
+										.children[0].textContent,
+									identifier: xmlDoc
+										.getElementsByTagName('organization')[0]
+										.children[0].children[i].children[
+											ii
+										].getAttributeNode('identifier')
+										.nodeValue,
+									identifierref: xmlDoc
+										.getElementsByTagName('organization')[0]
+										.children[0].children[i].children[
+											ii
+										].getAttributeNode('identifierref')
+										.nodeValue,
+								};
+
+								tCnt++;
+							}
+						} else {
+							console.log(
+								'uncatched nodeName? ' +
+									xmlDoc.getElementsByTagName(
+										'organization',
+									)[0].children[0].children[i].children[ii]
+										.nodeName,
+							);
+						}
+					}
+				}
+
+				fGenFullList();
+			}
+
+			function fGenRes(xmlData) {
+				//Validate
+
+				//Parse
+				xmlParser = new DOMParser();
+				xmlDoc = xmlParser.parseFromString(xmlData, 'text/xml');
+
+				//Loop through resources
+				for (
+					var i = 0;
+					i <
+					xmlDoc.getElementsByTagName('resources')[0].children.length;
+					i++
+				) {
+					//Alias
+					resID = xmlDoc
+						.getElementsByTagName('resources')[0]
+						.children[i].getAttributeNode('identifier').nodeValue;
+
+					//Assign Type
+					resArr[resID] = {
+						type: xmlDoc
+							.getElementsByTagName('resources')[0]
+							.children[i].getAttributeNode('type').nodeValue,
+					};
+
+					//Register dependencies if exists
+					if (
+						xmlDoc
+							.getElementsByTagName('resources')[0]
+							.children[i].getElementsByTagName(
+								'dependency',
+							)[0] !== undefined
+					) {
+						resArr[resID].dependency = xmlDoc
+							.getElementsByTagName('resources')[0]
+							.children[i].getElementsByTagName('dependency')[0]
+							.getAttributeNode('identifierref').nodeValue;
+					}
+
+					//Register files
+					resArr[resID].files = [];
+
+					//Loop through resources inner tags and register
+					for (
+						var ii = 0;
+						ii <
+						xmlDoc.getElementsByTagName('resources')[0].children[i]
+							.children.length;
+						ii++
+					) {
+						if (
+							xmlDoc.getElementsByTagName('resources')[0]
+								.children[i].children[ii].nodeName == 'file'
+						) {
+							resArr[resID].files.push(
+								xmlDoc
+									.getElementsByTagName('resources')[0]
+									.children[i].children[ii].getAttributeNode(
+										'href',
+									).nodeValue,
+							);
+						} else {
+							//Error handling
+							console.log(
+								'uncatched nodeName? ' +
+									xmlDoc.getElementsByTagName('resources')[0]
+										.children[i].children[ii].nodeName,
+							);
+						}
+					}
+				}
+			}
+
+			//Generate full index and display on screen
+			function fGenFullList() {
+				//Loop through modules
+				for (var i = 0; i < indexArr.length; i++) {
+					//Add checkbox for adding/removing items manually from generated list
+					fOut(
+						'<label><input type="checkbox" checked>' +
+							indexArr[i].title,
+					);
+					//Loop through items
+					for (var ii = 0; ii < indexArr[i].items.length; ii++) {
+						//Skip items without identifierref
+						if (indexArr[i].items[ii].identifierref == undefined) {
+							continue;
+						}
+						fOut(
+							'<label><input type="checkbox" checked> - ' +
+								indexArr[i].items[ii].title +
+								'</label> - [<a href="' +
+								localUrl +
+								resArr[indexArr[i].items[ii].identifierref]
+									.files[0] +
+								'" target="_blank">' +
+								resArr[indexArr[i].items[ii].identifierref]
+									.type +
+								'</a>]',
+						);
+						//Check for dependencies
+						if (
+							resArr[indexArr[i].items[ii].identifierref]
+								.dependency != undefined
+						) {
+							for (
+								var iii = 0;
+								iii <
+								resArr[
+									resArr[indexArr[i].items[ii].identifierref]
+										.dependency
+								].files.length;
+								iii++
+							) {
+								fOut(
+									'  -&gt;Dependance: <a href="' +
+										localUrl +
+										resArr[
+											resArr[
+												indexArr[i].items[ii]
+													.identifierref
+											].dependency
+										].files[iii] +
+										'" target="_blank">' +
+										resArr[
+											resArr[
+												indexArr[i].items[ii]
+													.identifierref
+											].dependency
+										].files[iii] +
+										'</a>',
+								);
+							}
+						}
+					}
+				}
+			}
+
+			//Generate HTML from course content
+			function fGenHtml() {
+				//Remove index
+				$('#output').remove();
+				for (var i = 0; i < indexArr.length; i++) {
+					//Generate Module container
+					$('#generated_content').append(
+						'<div id="module_' + i + '"></div>',
+					);
+
+					for (var ii = 0; ii < indexArr[i].items.length; ii++) {
+						//Skip items without identifierref
+						if (indexArr[i].items[ii].identifierref == undefined) {
+							continue;
+						}
+						//Generate submodule container
+						$('#generated_content #module_' + i).append(
+							'<div id="item_' + ii + '"></div>',
+						);
+						//Register Html Resource for async loading handling
+						htmlResCounter++;
+						//Load content
+						fLoadHtml(
+							localUrl +
+								resArr[indexArr[i].items[ii].identifierref]
+									.files[0],
+							'#generated_content #module_' + i + ' #item_' + ii,
+						);
+					}
+				}
+				console.log(htmlResCounter + ' HTML files to be loaded...');
+			}
+
+			//Load HTML into target element
+			function fLoadHtml(url, target) {
+				//Dev
+				var client = new XMLHttpRequest();
+				client.open('GET', url);
+				client.onreadystatechange = function () {
+					if (this.readyState == 4 && this.status == 200) {
+						//HTML placeholder
+						var htmlBuffer = '';
+
+						//Create inner element
+						var el = $('<div></div>');
+
+						//Register head meta links
+						var metaLinks = client.response.match(/<link.*>/g);
+
+						//Loop through links (for external CSS and JS)
+						if (Array.isArray(metaLinks)) {
+							for (var i in metaLinks) {
+								//Modify link to reflect online URL
+								fPushCssIfNew(
+									'https://app.csps-efpc.gc.ca' +
+										metaLinks[i]
+											.split('href="')[1]
+											.split('"')[0],
+									cssArr,
+								);
+							}
+						} else {
+							console.log('metalink not an array?');
+						}
+
+						//Strip Head, keep body only
+						if (client.responseText == '') {
+							console.log('client.responseText is blank, skip?');
+						} else {
+							htmlBuffer = client.responseText.substring(
+								client.responseText.indexOf('<body>'),
+								client.responseText.indexOf('</body>'),
+							);
+						}
+
+						//Strip Script tags
+						htmlBuffer = htmlBuffer.replace(
+							/<script[^<]*<\/script>/g,
+							'',
+						);
+						htmlBuffer = htmlBuffer.replace(
+							/<script.*<\/script>/g,
+							'',
+						);
+
+						//Modify SRC attributes to reflect offline structure
+						htmlBuffer = htmlBuffer.replace(
+							/src="/g,
+							'src="' +
+								this.responseURL.substring(
+									0,
+									this.responseURL.lastIndexOf('/'),
+								) +
+								'/',
+						);
+
+						// el.html(client.responseText); //<-OLD
+						el.html(htmlBuffer);
+
+						$(target).append(el);
+						// $(target).append($('html', el));
+
+						htmlLoadedResCounter++;
+
+						//Check if everything is loaded
+						fCheckIfResLoadingComplete(); //<- should be called from all loaded script... create all load function
+					}
+				};
+				client.send();
+			}
+
+			//Load XML manifest from input URL field
+			function fLoadXml() {
+				localUrl =
+					'imscc_files/' +
+					document
+						.getElementById('xml_loadurl')
+						.value.replace(/imsmanifest.xml/g, '');
+
+				//Load via XMLHttpRequest for now
+				var client = new XMLHttpRequest();
+				client.onload = fileLoadHandler;
+				client.open('GET', localUrl + '/imsmanifest.xml');
+				client.send();
+			}
+
+			//Handle file loading
+			function fileLoadHandler() {
+				//Check if loading successful
+				if (this.status == 200 && this.responseXML != null) {
+					//Load XML into textarea
+					$('#xml_input').val(this.responseText);
+					//Also store it!
+					xmlManifest = this.responseText;
+				} else {
+					console.log('Unable to load XML Manifest: ' + this.status);
+				}
+			}
+
+			//Check If all html resources loaded
+			function fCheckIfResLoadingComplete() {
+				//Compare res. counter to loaded res. counter, if all loaded, then success!
+				if (htmlResCounter == htmlLoadedResCounter) {
+					//Load CSS if option checked
+					if ($('#bs2d_opt_loadcss').prop('checked')) {
+						for (var i = 0; i < cssArr.length; i++) {
+							$('head').append(
+								'<link rel="stylesheet" href="' +
+									cssArr[i] +
+									'">',
+							);
+						}
+					} else {
+						//If CSS not to be loaded...
+					}
+				}
+			}
+
+			//Function meant to fix HTML after load (ex: show all modals, expand all accordion boxes...)
+			function fFixHtml() {
+				//Remove collapse class to show more content (ex: transcript)
+				$('*').removeClass('collapse');
+
+				//Modify display:none list
+				//Quizzes: feedback
+				//Video Transcripts
+				//Show-hide panels
+
+				$('iframe').each(function () {
+					if ($(this).attr('src').indexOf('https://') >= 0) {
+						$(this).attr(
+							'src',
+							$(this)
+								.attr('src')
+								.substring(
+									$(this).attr('src').indexOf('https://'),
+								),
+						);
+					}
+				});
+
+				/*$("img").each(function(){
+            if($(this).attr("width") && $(this).attr("width") != "" && $(this).attr("height") && $(this).attr("height") != ""){
+              $(this).removeAttr("height");
+            }
+          });
+
+          $(".float-left").removeClass("float-left");
+          $(".float-right").removeClass("float-right");*/
+
+				//this function replaces select tags with their option values as p tags
+				//for each select tag in the page
+				$('select').each(function () {
+					//get all of the options in the select tag
+					var listOfOptions = $(this).find('option');
+					// create empty array to store the text in
+					var valueString = '';
+					//for each option inside the current select tag
+					for (var i = 0; i < listOfOptions.length; i++) {
+						//the first element is usually disabled and will sometimes say something like please choose or choisir
+						//if the element is disabled then keep it but add formatting so that it is readable.
+						//lots of "if" statements so I used some ternary operators
+						if (listOfOptions[i].hasAttribute('disabled')) {
+							//proper formatting for english vs french
+							valueString =
+								document.documentElement.lang == 'en'
+									? (valueString =
+											valueString +
+											listOfOptions[i].text +
+											': ')
+									: (valueString =
+											valueString +
+											listOfOptions[i].text +
+											' : ');
+						} else {
+							//if the current options element is the last in the array we add a period to the end.
+							//if it isnt the last element, add a comma
+							//we use +1 because arrays start at 0
+							valueString =
+								i + 1 == listOfOptions.length
+									? valueString + listOfOptions[i].text + '.'
+									: valueString +
+									  listOfOptions[i].text +
+									  ', ';
+						}
+					}
+					//once we have created the string from all of the options we replace the select tag with a p tag containing the string
+					$(this).replaceWith('<p>' + valueString + '</p>');
+				});
+
+				//display or hide answer keys
+				if ($('#answerkeys').is(':checked')) {
+					$('.feedback').css('display', 'block');
+				} else {
+					$('.feedback').css('display', 'none');
+				}
+
+				//this function fixes the branching activity html to make it readable on paper
+				$('.branching-activity')
+					.find('.info > ol > li > ol > li')
+					.each(function () {
+						var lang = document.documentElement.lang;
+
+						//regexp for finding the number at the end of the text entry.
+						//it also searches for a possible period and space so that we can format properly
+						var result = $(this)
+							.text()
+							.match(/(\.?)(\s?)(\d+$)/);
+
+						if (lang == 'en') {
+							$(this).text(
+								$(this)
+									.text()
+									.replace(
+										/(\.?)(\s?)(\d+$)/,
+										'.\nContinue to event ' +
+											result[3] +
+											'.',
+									),
+							);
+						} else if (lang == 'fr') {
+							$(this).text(
+								$(this)
+									.text()
+									.replace(
+										/(\.?)(\s?)(\d+$)/,
+										".\nContinuer à l'événement numéro " +
+											result[3] +
+											'.',
+									),
+							);
+						}
+					});
+				//display or hide decorative images
+				//this is done by checking if there is any alt text
+				//decorative images should not have any alt text
+				if ($('#decorativeimages').is(':checked')) {
+					$('img').each(function () {
+						if ($(this).attr('alt') == '') {
+							$(this).css('display', 'block');
+						}
+					});
+				} else {
+					$('img').each(function () {
+						if ($(this).attr('alt') == '') {
+							$(this).css('display', 'none');
+						}
+					});
+				}
+
+				//
+				//Remove system tools and UI
+				$('#bs2docui').remove();
+			}
+
+			//Check if CSS needs to be added
+			function fPushCssIfNew(data, arr) {
+				data = data.substring(0, data.indexOf('?'));
+				var injection = true;
+
+				//Loop through CSS already in list, false if it exists (don't want duplicates!)
+				for (pi in arr) {
+					if (arr[pi] == data) {
+						injection = false;
+						break;
+					}
+				}
+
+				//Inject CSS only if required
+				if (injection) {
+					arr.push(data);
+				} else {
+					console.log('injection REJECTED');
+				}
+			}
+
+			//Simple function to output HTML content to #output
+			function fOut(msg) {
+				$('#output').append(msg + '<br>');
+			}
+		</script>
+	</body>
+</html>

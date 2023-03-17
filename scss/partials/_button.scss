@@ -1,0 +1,33 @@
+@use "../vars" as v;
+
+.btn {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    color: v.$main-btn-text;
+    background-color: v.$main-btn-color;
+    border-radius: 10px;
+    padding: 5px 25px;
+    &.one {
+
+            color: #43c4e8;
+    }
+    &.two {
+
+            color: #56aeff;
+    }
+    &.three {
+
+            color: #436ce8;
+    }
+    &.four {
+
+            color: #4d4aff;
+    }
+    &:hover {
+        background-color: v.$secondary-btn-color;
+    }
+    svg {
+        fill: v.$main-text-color;
+    }
+}

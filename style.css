@@ -1,0 +1,93 @@
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/barlow-v12-latin-regular.woff2") format("woff2"), url("fonts/barlow-v12-latin-regular.woff") format("woff"); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* text style start */
+h1 {
+  font-size: 2.25rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+label {
+  user-select: none;
+}
+
+/* barlow-regular - latin */
+:root {
+  --main-bg-color: #f0f0f0;
+  --main-text-color: #222;
+  --main-btn-color: #dadada;
+  --main-btn-text: #222;
+  --secondary-btn-color: #d6d6d6;
+  --main-font: "Barlow" ;
+}
+
+* {
+  line-height: 1.6rem;
+  font-size: 16px;
+  font-family: var(--main-font);
+}
+
+.container {
+  margin: 0 60px 0 60px;
+}
+
+textarea .input-container {
+  display: flex;
+  outline: 2px solid var(--main-text-color);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.flex-col {
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-grow: 3;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.flex-col.panel {
+  flex-grow: 1;
+  background-color: var(--main-text-color);
+  color: var(--main-bg-color);
+}
+
+.btn {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  color: var(--main-btn-text);
+  background-color: var(--main-btn-color);
+  border-radius: 10px;
+  padding: 5px 25px;
+}
+.btn.one {
+  color: #43c4e8;
+}
+.btn.two {
+  color: #56aeff;
+}
+.btn.three {
+  color: #436ce8;
+}
+.btn.four {
+  color: #4d4aff;
+}
+.btn:hover {
+  background-color: var(--secondary-btn-color);
+}
+.btn svg {
+  fill: var(--main-text-color);
+}
+
+/*# sourceMappingURL=style.css.map */

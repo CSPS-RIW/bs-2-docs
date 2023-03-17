@@ -1,0 +1,17 @@
+@use '../vars' as v;
+/* barlow-regular - latin */
+
+:root {
+    --main-bg-color: #f0f0f0;
+    --main-text-color: #222;
+    --main-btn-color: #dadada;
+    --main-btn-text: #222;
+    --secondary-btn-color: #d6d6d6;
+    --main-font: "Barlow"
+}
+
+* {
+    line-height: 1.6rem;
+    font-size: 16px;
+    font-family: v.$main-font;
+}

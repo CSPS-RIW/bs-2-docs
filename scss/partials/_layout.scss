@@ -1,0 +1,32 @@
+@use "../vars" as v;
+
+.container {
+    margin: 0 60px 0 60px;
+}
+
+// #xml_loadurl{
+//     width: 100%;
+// }
+
+textarea
+
+.input-container {
+    display: flex;
+    outline: 2px solid v.$main-text-color;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.flex-col {
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-grow: 3;
+    flex-direction: column;
+    justify-content: space-between;
+    &.panel {
+        flex-grow: 1;
+        background-color: v.$main-text-color;
+        color: v.$main-bg-color;
+    }
+}

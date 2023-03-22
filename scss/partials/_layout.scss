@@ -19,6 +19,55 @@ body {
 	}
 }
 
+.grid-flow {
+	display: grid;
+	align-content: start;
+	gap: 1rem;
+}
+
+.flex-group {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.grid-flow[data-spacing='large'] {
+	gap: 2rem;
+}
+
+.container {
+	--padding: 2.5rem;
+	--border-radius: 2rem;
+
+	max-width: 46rem;
+	display: grid;
+}
+
+@media (min-width: 600px) {
+	.container {
+		margin-inline: 1rem;
+		grid-template-columns: 1fr 1fr;
+		border-radius: var(--border-radius);
+		overflow: hidden;
+		box-shadow: 0.5rem 1rem 3rem v.$main-text-color;
+	}
+}
+
+.text-input {
+	color: v.$main-text-color;
+	text-align: center;
+	padding: var(--padding) calc(var(--padding) * 1.5);
+	background: v.$main-btn-color;
+	border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+@media (min-width: 600px) {
+	.text-input {
+		border-radius: var(--border-radius);
+	}
+}
+
 // .container {
 //     display: flex;
 //     align-items: center;

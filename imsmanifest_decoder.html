@@ -22,108 +22,104 @@
 		<div class="container">
 			<div id="bs2docui">
 				<h1>IMSCC XML DATA TO HTML OUTPUT</h1>
-				<div class="input-container">
-					<div class="flex-col lg">
-						<label for="xml_loadurl">Target XML URL:</label
-						><input
-							id="xml_loadurl"
-							type="text"
-							value="COR310-DEV-EN/imsmanifest.xml" />
-						<label for="xml_input">Loaded XML content: </label>
-						<textarea
-							name="main_input"
-							id="xml_input"
-							cols="30"
-							rows="10"></textarea>
+				<div class="text-input grid-flow" data-spacing="large">
+					<label for="xml_loadurl">Target XML URL:</label
+					><input
+						id="xml_loadurl"
+						type="text"
+						value="COR310-DEV-EN/imsmanifest.xml" />
+					<label for="xml_input">Loaded XML content: </label>
+					<textarea
+						name="main_input"
+						id="xml_input"
+						cols="30"
+						rows="10"></textarea>
+				</div>
+				<div class="panel grid-flow" data-spacing="large">
+					<button
+						class="btn flex-group"
+						onclick="javascript:fLoadXml();">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24">
+							<path
+								fill="currentColor"
+								d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm-.5-3v7q0 .425.288.712q.287.288.712.288t.713-.288q.287-.287.287-.712V8q0-.425-.287-.713Q12.925 7 12.5 7h-2q-.425 0-.712.287Q9.5 7.575 9.5 8t.288.712Q10.075 9 10.5 9Z" />
+						</svg>
+						Load XML
+					</button>
+					<button
+						class="btn flex-group"
+						onclick="javascript:fGenIndex();">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24">
+							<path
+								fill="currentColor"
+								d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm2 5q.425 0 .713-.288Q15 16.425 15 16t-.287-.713Q14.425 15 14 15h-3v-2h2q.825 0 1.413-.588Q15 11.825 15 11V9q0-.825-.587-1.413Q13.825 7 13 7h-3q-.425 0-.712.287Q9 7.575 9 8t.288.712Q9.575 9 10 9h3v2h-2q-.825 0-1.412.587Q9 12.175 9 13v3q0 .425.288.712Q9.575 17 10 17Z" />
+						</svg>
+						Generate Index
+					</button>
+					<button
+						class="btn flex-group"
+						onclick="javascript:fGenHtml();">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24">
+							<path
+								fill="currentColor"
+								d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm-2 5h3q.825 0 1.413-.587Q15 15.825 15 15v-1.5q0-.65-.425-1.075Q14.15 12 13.5 12q.65 0 1.075-.425Q15 11.15 15 10.5V9q0-.825-.587-1.413Q13.825 7 13 7h-3q-.425 0-.712.287Q9 7.575 9 8t.288.712Q9.575 9 10 9h3v2h-1q-.425 0-.712.287Q11 11.575 11 12t.288.712Q11.575 13 12 13h1v2h-3q-.425 0-.712.287Q9 15.575 9 16t.288.712Q9.575 17 10 17Z" />
+						</svg>
+						Generate HTML
+					</button>
+					<button
+						class="btn flex-group"
+						onclick="javascript:fFixHtml();">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24">
+							<path
+								fill="currentColor"
+								d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm1 1v3q0 .425.288.712q.287.288.712.288t.713-.288Q15 16.425 15 16V8q0-.425-.287-.713Q14.425 7 14 7t-.712.287Q13 7.575 13 8v3h-2V8q0-.425-.287-.713Q10.425 7 10 7t-.712.287Q9 7.575 9 8v4q0 .425.288.712Q9.575 13 10 13Z" />
+						</svg>
+						"Fix" HTML (wait for everything to be loaded)
+					</button>
+					<div class="checkbox">
+						<input id="answerkeys" type="checkbox" /><label
+							for="answerkeys"
+							>Include answer keys?</label
+						>
 					</div>
-					<div class="flex-col sm panel">
-						<button
-							class="btn one"
-							onclick="javascript:fLoadXml();">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24">
-								<path
-									fill="currentColor"
-									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm-.5-3v7q0 .425.288.712q.287.288.712.288t.713-.288q.287-.287.287-.712V8q0-.425-.287-.713Q12.925 7 12.5 7h-2q-.425 0-.712.287Q9.5 7.575 9.5 8t.288.712Q10.075 9 10.5 9Z" />
-							</svg>
-							Load XML
-						</button>
-						<button
-							class="btn two"
-							onclick="javascript:fGenIndex();">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24">
-								<path
-									fill="currentColor"
-									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm2 5q.425 0 .713-.288Q15 16.425 15 16t-.287-.713Q14.425 15 14 15h-3v-2h2q.825 0 1.413-.588Q15 11.825 15 11V9q0-.825-.587-1.413Q13.825 7 13 7h-3q-.425 0-.712.287Q9 7.575 9 8t.288.712Q9.575 9 10 9h3v2h-2q-.825 0-1.412.587Q9 12.175 9 13v3q0 .425.288.712Q9.575 17 10 17Z" />
-							</svg>
-							Generate Index
-						</button>
-						<button
-							class="btn three"
-							onclick="javascript:fGenHtml();">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24">
-								<path
-									fill="currentColor"
-									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm-2 5h3q.825 0 1.413-.587Q15 15.825 15 15v-1.5q0-.65-.425-1.075Q14.15 12 13.5 12q.65 0 1.075-.425Q15 11.15 15 10.5V9q0-.825-.587-1.413Q13.825 7 13 7h-3q-.425 0-.712.287Q9 7.575 9 8t.288.712Q9.575 9 10 9h3v2h-1q-.425 0-.712.287Q11 11.575 11 12t.288.712Q11.575 13 12 13h1v2h-3q-.425 0-.712.287Q9 15.575 9 16t.288.712Q9.575 17 10 17Z" />
-							</svg>
-							Generate HTML
-						</button>
-						<button
-							class="btn four"
-							onclick="javascript:fFixHtml();">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24">
-								<path
-									fill="currentColor"
-									d="M12 22q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Zm0-2q3.35 0 5.675-2.325Q20 15.35 20 12q0-3.35-2.325-5.675Q15.35 4 12 4Q8.65 4 6.325 6.325Q4 8.65 4 12q0 3.35 2.325 5.675Q8.65 20 12 20Zm0-8Zm1 1v3q0 .425.288.712q.287.288.712.288t.713-.288Q15 16.425 15 16V8q0-.425-.287-.713Q14.425 7 14 7t-.712.287Q13 7.575 13 8v3h-2V8q0-.425-.287-.713Q10.425 7 10 7t-.712.287Q9 7.575 9 8v4q0 .425.288.712Q9.575 13 10 13Z" />
-							</svg>
-							"Fix" HTML (wait for everything to be loaded)
-						</button>
-						<div class="checkbox">
-							<input id="answerkeys" type="checkbox" /><label
-								for="answerkeys"
-								>Include answer keys?</label
-							>
-						</div>
+					<div class="checkbox">
+						<input id="decorativeimages" type="checkbox" /><label
+							for="decorativeimages"
+							>Include decorative images?</label
+						>
+					</div>
+
+					<!-- <button onClick="javascript:location.reload();">Step 5-Refresh</button> -->
+
+					<div id="controls_options">
+						<!-- <p>[page selection invert BUTTON]</p> -->
+						<!-- <p>[override XML from textarea CHECKBOX]</p> -->
+						<!-- <p>[load css CHECKBOX]</p> -->
 						<div class="checkbox">
 							<input
-								id="decorativeimages"
-								type="checkbox" /><label for="decorativeimages"
-								>Include decorative images?</label
+								id="bs2d_opt_loadcss"
+								type="checkbox"
+								checked /><label
+								>Attempt to retreive original styling/CSS</label
 							>
 						</div>
-
-						<!-- <button onClick="javascript:location.reload();">Step 5-Refresh</button> -->
-
-						<div id="controls_options">
-							<!-- <p>[page selection invert BUTTON]</p> -->
-							<!-- <p>[override XML from textarea CHECKBOX]</p> -->
-							<!-- <p>[load css CHECKBOX]</p> -->
-							<div class="checkbox">
-								<input
-									id="bs2d_opt_loadcss"
-									type="checkbox"
-									checked /><label
-									>Attempt to retreive original
-									styling/CSS</label
-								>
-							</div>
-							<!-- <p>[override xml]</p> -->
-						</div>
+						<!-- <p>[override xml]</p> -->
 					</div>
 				</div>
 

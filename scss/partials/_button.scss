@@ -10,6 +10,11 @@
 	cursor: pointer;
 }
 
+.btn:hover,
+.btn:focus-visible {
+	background: v.$secondary-btn-color;
+}
+
 // .btn {
 //     display: flex;
 //     justify-content: flex-start;

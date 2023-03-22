@@ -38,9 +38,8 @@ svg {
 }
 
 body {
-  font-family: var(--font-family-default);
-  font-size: var(--fs-400);
-  color: var(--clr-neutral-700);
+  font-family: var(--main-font);
+  font-size: 16px;
 }
 
 @media (min-width: 600px) {
@@ -73,7 +72,6 @@ body {
     grid-template-columns: 1fr 1fr;
     border-radius: var(--border-radius);
     overflow: hidden;
-    box-shadow: 0.5rem 1rem 3rem hsl(var(--clr-neutral-hsl-700), 0.2);
   }
 }
 .text-input {
@@ -101,6 +99,38 @@ body {
   border: 0;
   border-radius: 100vw;
   cursor: pointer;
+  transition: 0.3s ease;
+}
+.btn.panel-item[data-item-type=accent-1] {
+  color: var(--clr-accent-1);
+}
+.btn.panel-item[data-item-type=accent-1]:hover {
+  background-color: var(--clr-accent-1);
+  color: var(--main-btn-color);
+}
+.btn.panel-item[data-item-type=accent-2] {
+  color: var(--clr-accent-2);
+}
+.btn.panel-item[data-item-type=accent-2]:hover {
+  background-color: var(--clr-accent-2);
+  color: var(--main-btn-color);
+}
+.btn.panel-item[data-item-type=accent-3] {
+  color: var(--clr-accent-3);
+}
+.btn.panel-item[data-item-type=accent-3]:hover {
+  background-color: var(--clr-accent-3);
+  color: var(--main-btn-color);
+}
+.btn.panel-item[data-item-type=accent-4] {
+  color: var(--clr-accent-4);
+}
+.btn.panel-item[data-item-type=accent-4]:hover {
+  background-color: var(--clr-accent-4);
+  color: var(--main-btn-color);
+}
+.btn svg {
+  fill: var(--main-text-color);
 }
 
 .flex-group {

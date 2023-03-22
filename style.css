@@ -49,6 +49,10 @@ body {
     place-items: center;
   }
 }
+h1 {
+  font-size: 1.25rem;
+}
+
 .grid-flow {
   display: grid;
   align-content: start;

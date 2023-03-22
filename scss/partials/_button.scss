@@ -8,6 +8,38 @@
 	border: 0;
 	border-radius: 100vw;
 	cursor: pointer;
+	transition: 0.3s ease;
+	    &.panel-item[data-item-type='accent-1'] {
+        color: v.$clr-accent-1;
+        &:hover {
+                background-color: v.$clr-accent-1;
+                color: v.$main-btn-color;
+        }
+    }
+    &.panel-item[data-item-type='accent-2'] {
+        color: v.$clr-accent-2;
+        &:hover {
+                background-color: v.$clr-accent-2;
+                color: v.$main-btn-color;
+        }
+    }
+    &.panel-item[data-item-type='accent-3'] {
+        color: v.$clr-accent-3;
+        &:hover {
+                background-color: v.$clr-accent-3;
+                color: v.$main-btn-color;
+        }
+    }
+    &.panel-item[data-item-type='accent-4'] {
+        color: v.$clr-accent-4;
+        &:hover {
+                background-color: v.$clr-accent-4;
+                color: v.$main-btn-color;
+        }
+    }
+    svg {
+        fill: v.$main-text-color;
+    }
 }
 
 .flex-group {

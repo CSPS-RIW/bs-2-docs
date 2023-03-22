@@ -1,57 +1,75 @@
 @use "../vars" as v;
 @use '../breakpoints' as b;
 
-.container {
-    display: flex;
-    align-items: center;
-    margin: 0 60px 0 60px;
-    flex-direction: column;
-    justify-content: center;
-
+img,
+svg {
+	display: block;
+	max-width: 100%;
 }
 
-.input-container {
-        // width: 50vw;
-        margin-inline: auto;
-        display: flex;
-        flex-direction: column;
-        outline: 2px solid v.$main-text-color;
-        border-radius: 10px;
-        padding: 10px;
-        @include b.breakpoint(small) {
-            width: 60vw;
-            flex-direction: row;
-        }
-        @include b.breakpoint(xlarge) {
-            width: 40vw;
-        }
+body {
+    font-family: v.$main-font;
 }
 
-.flex-col {
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    &.sm {
+@media (min-width: 600px) {
+	body {
+		min-height: 100vh;
+		display: grid;
+		place-items: center;
+	}
+}
+
+// .container {
+//     display: flex;
+//     align-items: center;
+//     margin: 0 60px 0 60px;
+//     flex-direction: column;
+//     justify-content: center;
+
+// }
+
+// .input-container {
+//         // width: 50vw;
+//         margin-inline: auto;
+//         display: flex;
+//         flex-direction: column;
+//         outline: 2px solid v.$main-text-color;
+//         border-radius: 10px;
+//         padding: 10px;
+//         @include b.breakpoint(small) {
+//             width: 60vw;
+//             flex-direction: row;
+//         }
+//         @include b.breakpoint(xlarge) {
+//             width: 40vw;
+//         }
+// }
+
+// .flex-col {
+//     border-radius: 10px;
+//     padding: 20px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     &.sm {
         
-        width: 90%;
-    }
-    &.lg {
+//         width: 90%;
+//     }
+//     &.lg {
 
-        width: 90%;
-    }
-    &.panel {
-        background-color: v.$main-text-color;
-        color: v.$main-bg-color;
-    }
-    @include b.breakpoint(small) {
-        flex-direction: column;
-        &.sm {
-            width: 40%;
-        }
-        &.lg { 
-            width: 60%;
-        }
-    }
-}
+//         width: 90%;
+//     }
+//     &.panel {
+//         background-color: v.$main-text-color;
+//         color: v.$main-bg-color;
+//     }
+//     @include b.breakpoint(small) {
+//         flex-direction: column;
+//         &.sm {
+//             width: 40%;
+//         }
+//         &.lg { 
+//             width: 60%;
+//         }
+//     }
+// }

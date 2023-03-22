@@ -1,44 +1,54 @@
 @use "../vars" as v;
 
 .btn {
-    display: flex;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    color: v.$main-btn-text;
-    background-color: v.$main-btn-color;
-    border: 0;
-    border-radius: 10px;
-    padding: 5px 25px;
-    transition: 0.3s ease;
-    &.one {
-        color: #4d4aff;
-        &:hover {
-                background-color: #4d4aff;
-                color: v.$main-btn-color;
-        }
-    }
-    &.two {
-        color: #4543e6;
-        &:hover {
-                background-color: #4543e6;
-                color: v.$main-btn-color;
-        }
-    }
-    &.three {
-        color: #3a37bf;
-        &:hover {
-                background-color: #3a37bf;
-                color: v.$main-btn-color;
-        }
-    }
-    &.four {
-        color: #262580;
-        &:hover {
-                background-color: #262580;
-                color: v.$main-btn-color;
-        }
-    }
-    svg {
-        fill: v.$main-text-color;
-    }
+	color: v.$main-btn-text;
+	line-height: 1;
+	background: v.$main-btn-color;
+	padding: 1rem 2rem;
+	border: 0;
+	border-radius: 100vw;
+	cursor: pointer;
 }
+
+// .btn {
+//     display: flex;
+//     justify-content: flex-start;
+//     gap: 0.5rem;
+//     color: v.$main-btn-text;
+//     background-color: v.$main-btn-color;
+//     border: 0;
+//     border-radius: 10px;
+//     padding: 5px 25px;
+//     transition: 0.3s ease;
+//     &.one {
+//         color: #4d4aff;
+//         &:hover {
+//                 background-color: #4d4aff;
+//                 color: v.$main-btn-color;
+//         }
+//     }
+//     &.two {
+//         color: #4543e6;
+//         &:hover {
+//                 background-color: #4543e6;
+//                 color: v.$main-btn-color;
+//         }
+//     }
+//     &.three {
+//         color: #3a37bf;
+//         &:hover {
+//                 background-color: #3a37bf;
+//                 color: v.$main-btn-color;
+//         }
+//     }
+//     &.four {
+//         color: #262580;
+//         &:hover {
+//                 background-color: #262580;
+//                 color: v.$main-btn-color;
+//         }
+//     }
+//     svg {
+//         fill: v.$main-text-color;
+//     }
+// }

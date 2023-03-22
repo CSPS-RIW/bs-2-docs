@@ -8,20 +8,21 @@
     src: url('fonts/barlow-v12-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+ */
          url('fonts/barlow-v12-latin-regular.woff') format('woff'); /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   }
+  
 
 /* text style start */
 
-  h1 {
-    font-size: 2.25rem;
-}
+//   h1 {
+//     font-size: 2.25rem;
+// }
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: v.$main-bg-color;
-    color: v.$main-text-color;
-}
+// body {
+//     margin: 0;
+//     padding: 0;
+//     background-color: v.$main-bg-color;
+//     color: v.$main-text-color;
+// }
 
-label {
-    user-select: none;
-}
+// label {
+//     user-select: none;
+// }

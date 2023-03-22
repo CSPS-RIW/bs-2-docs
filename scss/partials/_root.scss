@@ -7,11 +7,27 @@
     --main-btn-color: #f4f4f4;
     --main-btn-text: #222;
     --secondary-btn-color: #d6d6d6;
-    --main-font: "Barlow"
+    --main-font: "Barlow";
+
+    --clr-accent-1: #4d4aff;
+    --clr-accent-2: #4543e6;
+    --clr-accent-3: #3a37bf;
+    --clr-accent-4: #262580;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
 * {
-    line-height: 1.6rem;
-    font-size: 16px;
-    font-family: v.$main-font;
+	margin: 0;
+	font: inherit;
 }
+
+// * {
+//     line-height: 1.6rem;
+//     font-size: 16px;
+//     font-family: v.$main-font;
+// }

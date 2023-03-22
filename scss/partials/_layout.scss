@@ -1,42 +1,17 @@
 @use "../vars" as v;
 @use '../breakpoints' as b;
 
-img,
-svg {
-	display: block;
-	max-width: 100%;
-}
-
-body {
-    font-family: v.$main-font;
-}
-
-@media (min-width: 600px) {
-	body {
-		min-height: 100vh;
-		display: grid;
-		place-items: center;
-	}
-}
-
 .grid-flow {
 	display: grid;
 	align-content: start;
 	gap: 1rem;
 }
 
-.flex-group {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-	flex-wrap: wrap;
-}
-
 .grid-flow[data-spacing='large'] {
 	gap: 2rem;
 }
 
-.container {
+.app-container {
 	--padding: 2.5rem;
 	--border-radius: 2rem;
 
@@ -45,12 +20,12 @@ body {
 }
 
 @media (min-width: 600px) {
-	.container {
+	.app-container {
 		margin-inline: 1rem;
 		grid-template-columns: 1fr 1fr;
 		border-radius: var(--border-radius);
 		overflow: hidden;
-		box-shadow: 0.5rem 1rem 3rem v.$main-text-color;
+		box-shadow: 0.5rem 1rem 3rem hsl(var(--clr-neutral-hsl-700), 0.2);
 	}
 }
 
@@ -66,6 +41,10 @@ body {
 	.text-input {
 		border-radius: var(--border-radius);
 	}
+}
+
+.panel {
+	padding: var(--padding);
 }
 
 // .container {

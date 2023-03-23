@@ -27,7 +27,7 @@
 					><input
 						id="xml_loadurl"
 						type="text"
-						value="COR310-DEV-EN/imsmanifest.xml" />
+						value="COR105-DEV-EN/imsmanifest.xml" />
 				</div>
 				<div class="grid-flow">
 					<label for="xml_input">Loaded XML content: </label>
@@ -127,10 +127,10 @@
 					<!-- <p>[override xml]</p> -->
 				</div>
 			</div>
-
-			<div id="generated_content"></div>
-			<div id="output"></div>
 		</div>
+		<div id="generated_content"></div>
+		<div id="output"></div>
+
 		<script>
 			//Init vars
 			var indexArr = [];
@@ -595,9 +595,7 @@
 					if ($('#bs2d_opt_loadcss').prop('checked')) {
 						for (var i = 0; i < cssArr.length; i++) {
 							$('head').append(
-								'<link rel="stylesheet" href="' +
-									cssArr[i] +
-									'">',
+								'<link rel="stylesheet" href="<link rel="stylesheet" href="https://app.csps-efpc.gc.ca/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/css/styles.min.css>"',
 							);
 						}
 					} else {
@@ -615,6 +613,10 @@
 				//Quizzes: feedback
 				//Video Transcripts
 				//Show-hide panels
+
+				$('head').append(
+					'<link rel="stylesheet" src="https://app.csps-efpc.gc.ca/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/css/styles.min.css"',
+				);
 
 				$('iframe').each(function () {
 					if ($(this).attr('src').indexOf('https://') >= 0) {

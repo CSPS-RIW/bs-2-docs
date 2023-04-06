@@ -1,4 +1,4 @@
-@use "../vars" as v;
+@use '../vars' as v;
 @use '../breakpoints' as b;
 
 .grid-flow {
@@ -44,7 +44,9 @@
 .panel {
 	padding: var(--padding);
 }
-
+textarea {
+	max-width: 20rem;
+}
 // .container {
 //     display: flex;
 //     align-items: center;
@@ -78,7 +80,7 @@
 //     flex-direction: column;
 //     justify-content: space-between;
 //     &.sm {
-        
+
 //         width: 90%;
 //     }
 //     &.lg {
@@ -94,7 +96,7 @@
 //         &.sm {
 //             width: 40%;
 //         }
-//         &.lg { 
+//         &.lg {
 //             width: 60%;
 //         }
 //     }

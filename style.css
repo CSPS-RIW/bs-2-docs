@@ -96,6 +96,10 @@ h1 {
   padding: var(--padding);
 }
 
+textarea {
+  max-width: 20rem;
+}
+
 .btn {
   color: var(--main-btn-text);
   line-height: 1;

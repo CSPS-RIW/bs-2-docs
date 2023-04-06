@@ -34,6 +34,8 @@
 					<textarea
 						name="main_input"
 						id="xml_input"
+						maxlength="10"
+						readonly="true"
 						cols="30"
 						rows="10"></textarea>
 				</div>
@@ -583,6 +585,7 @@
 					//Also store it!
 					xmlManifest = this.responseText;
 				} else {
+					alert('Unable to load XML Manifest: ');
 					console.log('Unable to load XML Manifest: ' + this.status);
 				}
 			}

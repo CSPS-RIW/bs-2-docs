@@ -199,7 +199,7 @@
 								// Find extracted content
 								let fileContents = await fileName.async('blob');
 
-								// Create form data and attatch contents
+								// Create form data and attach contents
 								let formData = new FormData();
 								formData.append(
 									'file',
@@ -208,21 +208,25 @@
 								);
 								formData.append('directory', folderName);
 
-								// Send the file contents to the server
-								const response = await fetch('/upload', {
-									method: 'POST',
-									body: formData,
-								});
-								if (response.ok) {
-									console.log(
-										`File "${fileName.name}" uploaded successfully`,
-									);
-								} else {
-									console.error(
-										`Error uploading file "${fileName.name}":`,
-										response.statusText,
-									);
-								}
+								// Send the file contents to the server using XHR
+								const xhr = new XMLHttpRequest();
+								xhr.open('GET', '/');
+								xhr.onreadystatechange = function () {
+									if (
+										xhr.readyState === 4 &&
+										xhr.status === 200
+									) {
+										console.log(
+											`File "${fileName.name}" uploaded successfully`,
+										);
+									} else if (xhr.readyState === 4) {
+										console.error(
+											`Error uploading file "${fileName.name}":`,
+											xhr.statusText,
+										);
+									}
+								};
+								xhr.send(formData);
 
 								// create text value for Target XML URL input
 								if (relativepath === 'imsmanifest.xml') {
@@ -231,12 +235,8 @@
 										`${folderName}/${fileName.name}`,
 									);
 								}
-								// console.log(
-								// 	`path: ${relativepath}`,
-								// 	`fileName: ${fileName.name}`,
-								// );
 							});
-							// console.log(zip);
+							// TODO: Add fLoadXml to run here
 						})
 						.catch((error) => {
 							console.error('Error unzipping file:', error);
@@ -653,16 +653,14 @@
 
 			//Load XML manifest from input URL field
 			function fLoadXml() {
-				localUrl =
-					'imscc_files/' +
-					document
-						.getElementById('xml_loadurl')
-						.value.replace(/imsmanifest.xml/g, '');
+				localUrl = +document
+					.getElementById('xml_loadurl')
+					.value.replace(/imsmanifest.xml/g, '');
 
 				//Load via XMLHttpRequest for now
 				var client = new XMLHttpRequest();
 				client.onload = fileLoadHandler;
-				client.open('GET', localUrl + '/imsmanifest.xml');
+				client.open('GET', '/imsmanifest.xml');
 				// client.open('GET', url);
 				client.send();
 			}

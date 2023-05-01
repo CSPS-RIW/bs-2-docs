@@ -42,6 +42,11 @@
 				</div>
 			</div>
 			<div class="panel grid-flow" data-spacing="large">
+				<input
+					type="file"
+					name="upload_files"
+					id="upload_files"
+					multiple />
 				<button
 					class="panel-item btn flex-group"
 					data-item-type="accent-1"
@@ -156,6 +161,23 @@
 			// 			`;
 			// 			console.log(xmlInput);
 
+			let xmlUpload = document.querySelector('#upload_files');
+
+			xmlUpload.addEventListener('change', () => {
+				let files = event.target.files;
+
+				for (let i = 0; i < files.length; i++) {
+					let file = files[i];
+					let reader = new FileReader();
+
+					reader.addEventListener('load', (event) => {
+						let fileContents = event.target.result;
+						console.log(fileContents);
+					});
+
+					reader.readAsText(file);
+				}
+			});
 			//Generate main index from XML data
 			function fGenIndex() {
 				//

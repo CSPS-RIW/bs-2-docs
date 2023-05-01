@@ -209,24 +209,24 @@
 								formData.append('directory', folderName);
 
 								// Send the file contents to the server using XHR
-								const xhr = new XMLHttpRequest();
-								xhr.open('GET', '/');
-								xhr.onreadystatechange = function () {
+								const client = new XMLHttpRequest();
+								client.open('GET', '/');
+								client.onreadystatechange = function () {
 									if (
-										xhr.readyState === 4 &&
-										xhr.status === 200
+										client.readyState === 4 &&
+										client.status === 200
 									) {
 										console.log(
 											`File "${fileName.name}" uploaded successfully`,
 										);
-									} else if (xhr.readyState === 4) {
+									} else if (client.readyState === 4) {
 										console.error(
 											`Error uploading file "${fileName.name}":`,
-											xhr.statusText,
+											client.statusText,
 										);
 									}
 								};
-								xhr.send(formData);
+								client.send(formData);
 
 								// create text value for Target XML URL input
 								if (relativepath === 'imsmanifest.xml') {
@@ -660,6 +660,7 @@
 				//Load via XMLHttpRequest for now
 				var client = new XMLHttpRequest();
 				client.onload = fileLoadHandler;
+				// Add localUrl to tweak it back to normal
 				client.open('GET', '/imsmanifest.xml');
 				// client.open('GET', url);
 				client.send();

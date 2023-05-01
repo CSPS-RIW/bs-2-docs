@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 944 944">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #023156;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 14.58px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="472" cy="472" r="424.21"/>
+  <g>
+    <rect class="cls-1" x="316.04" y="544.77" width="73.24" height="229.59" transform="translate(-370.09 467.13) rotate(-46.96)"/>
+    <rect class="cls-1" x="368.32" y="345.72" width="55.33" height="129.42" rx="27.66" ry="27.66" transform="translate(966.22 401.15) rotate(133.04)"/>
+    <rect class="cls-1" x="335.63" y="393.63" width="55.33" height="123.49" rx="27.66" ry="27.66" transform="translate(944.06 500.68) rotate(133.04)"/>
+    <rect class="cls-1" x="305.9" y="450.85" width="55.33" height="103.46" rx="27.66" ry="27.66" transform="translate(928.53 601.82) rotate(133.04)"/>
+    <rect class="cls-1" x="413.33" y="313.91" width="55.33" height="124.88" rx="27.66" ry="27.66" transform="translate(1017.05 310.92) rotate(133.04)"/>
+    <line class="cls-1" x1="314.07" y1="573.42" x2="341.62" y2="544.98"/>
+    <path class="cls-1" d="m468.87,364.53s-27.59-17.38-27.87-65.29c-.28-47.91,29.11-19.08,29.11-19.08l56.82,46.64,4.24,4.14"/>
+    <path class="cls-1" d="m597.31,500.63l33.71-33.39s25.44-25.44,46.75,0c21.31,25.44-6.25,48.23-6.25,48.23l-111.51,110.81s-25.65,22.54-63.81,26.36c-38.16,3.82-55.19,39.32-55.19,39.32"/>
+    <path class="cls-1" d="m556.61,455.37l48.97-49.18s22.58-16.54,41.34,2.54c18.76,19.08-2.34,49.67-2.34,49.67"/>
+    <path class="cls-1" d="m513.36,417l46.64-48.02s22.37-21.62,43.99-2.54c21.62,19.08,3.03,38.81,3.03,38.81"/>
+    <path class="cls-1" d="m474.59,369.87l32.73-30.14s20.67-18.44,39.75-1.91c19.08,16.54,5.78,38.53,5.78,38.53"/>
+    <line class="cls-1" x1="673.97" y1="586.02" x2="636.63" y2="550.13"/>
+    <path class="cls-1" d="m451.7,676.54s27.74,13.2,59.11,4.72l29.39,29.69"/>
+    <polygon class="cls-1" points="521.81 728.13 571.79 781.65 739.59 624.95 689.6 571.42 540.21 710.94 521.81 728.13"/>
+    <polyline class="cls-1" points="465.49 232.24 465.49 160.61 465.49 138.11"/>
+    <polyline class="cls-1" points="520.25 248.32 569.14 195.97 584.49 179.53"/>
+    <polyline class="cls-1" points="416.87 246.05 364.52 197.16 348.08 181.8"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assignment xmlns="http://www.imsglobal.org/xsd/imscc_extensions/assignment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc_extensions/assignment http://www.imsglobal.org/profile/cc/cc_extensions/cc_extresource_assignmentv1p0_v1p0.xsd" identifier="i8eb6aa49-6fb2-4f54-9108-080f7ccbd98c">
+  <title>3.2 Personalizing our understanding of mental health</title>
+  <instructor_text texttype="text/html">&lt;p&gt;Why do you think it’s important to develop a personalized understanding of mental health?&lt;/p&gt;</instructor_text>
+  <submission_formats>
+    <format type="text" />
+  </submission_formats>
+</assignment>

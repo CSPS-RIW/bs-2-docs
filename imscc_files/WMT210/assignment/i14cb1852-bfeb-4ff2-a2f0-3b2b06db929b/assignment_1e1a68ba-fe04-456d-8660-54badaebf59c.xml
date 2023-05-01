@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assignment xmlns="http://www.imsglobal.org/xsd/imscc_extensions/assignment" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc_extensions/assignment http://www.imsglobal.org/profile/cc/cc_extensions/cc_extresource_assignmentv1p0_v1p0.xsd" identifier="icf233e24-ccee-4223-bcb8-4b177ea0eb89">
+  <title>4.1 Coping strategies and support</title>
+  <instructor_text texttype="text/html">&lt;p&gt;Which of these coping strategies speak to you personally? Do you already do any of them? Which ones do you plan to try after considering some of these options?&lt;/p&gt;</instructor_text>
+  <submission_formats>
+    <format type="text" />
+  </submission_formats>
+</assignment>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- preloaded
+    D2L template to be changed -->
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/thirdpartylib/bootstrap-4.3.1/css/bootstrap.min.css">
+		<!-- Template CSS -->
+		<link rel="stylesheet" href="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/css/styles.min.css">
+		<link rel="stylesheet" href="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/thirdpartylib/bootstrap-4.3.1/css/bootstrap.min.css" id="D2L_style_bootstrap">
+		<!-- inject:css -->
+		<link rel="stylesheet" href="csps-custom/square-breathing/assets/fontawesome-free-5.9.0-web/css/all.min.css">
+		<link rel="stylesheet" href="csps-custom/square-breathing/assets/css/csps-app.css">
+      <style>
+    .data .card-graphic, .data .card-standard {
+    border-color: #3F2A56;
+}
+  </style>
+		<!-- endinject -->
+  <style>
+    .data .jumbotron {
+    background-color: #3f2a56;
+}
+  </style>
+		<title>Custom Page</title>
+	</head><body><div class="wrapper">
+<div class="container-fluid data d-flex" id="app">
+<div class="row" style="width: 100%;">
+<div class="col-12 offset-md-1 col-md-10 offset-lg-2 col-lg-8 mt-5"><!-- Add your content here -->
+<div v-if="!this.start">
+<section class="mb-2">
+<h1><span style="color: rgb(73, 60, 105); font-family: tahoma, sans-serif;">Before you begin</span></h1>
+<div class="card card-graphic">
+<div class="card-body">
+<div class="card-icon">
+<p><img src="Mental_Health_atw/EN/img/CSPS_1.10_Trigger.svg" alt="" title="" width="80" height="80"></p>
+</div>
+<div class="card-text">
+<h2><span style="font-size: 19px; font-family: tahoma, sans-serif;"><strong>Content warning</strong></span></h2>
+<p><span style="font-size: 19px; font-family: tahoma, sans-serif;">This course has the potential to bring up thoughts, feelings, and trauma that may be overwhelming and confronting. We advise you to make your own well-being a priority. You may stop the course at any time. We encourage you to take breaks as needed, develop a plan for taking care of yourself during and after the course, and consult the linked <a target="_blank" href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=12107&amp;type=content&amp;rcode=DEED04CF-C688-4D49-AA65-6C063461A317-9674" rel="noopener" class="new-window" id="new-window0" data-original-title="opens in new window/tab" data-toggle="tooltip">resources and supports</a>.</span></p>
+</div>
+</div>
+</div>
+<p class="small" id="footnote-4"></p>
+<p></p>
+</section>
+<section class="mb-2">
+<p><span style="font-family: tahoma, sans-serif; font-size: 19px;">Before proceeding with the course, consider taking a few minutes to recenter yourself with a simple, 4-step breathing technique.&nbsp;</span><br><br><span style="font-family: tahoma, sans-serif; font-size: 19px;">When you're ready, click the Start button below.&nbsp;</span></p>
+</section>
+<div class="jumbotron">
+<div class="audio-img"><span style="font-family: tahoma, sans-serif; font-size: 19px;"><img src="csps-custom/square-breathing/assets/medias/audio.svg" alt=""></span></div>
+<p><span style="font-family: tahoma, sans-serif; font-size: 19px;">This activity uses audio. Please check your audio settings before proceeding.</span></p>
+</div>
+<div class="d-flex justify-content-center mb-3"><span style="font-family: tahoma, sans-serif; font-size: 19px;"><button class="btn btn-primary" @click="startActivity">Start</button></span></div>
+<div class="d-flex justify-content-center mb-3"><span style="font-family: tahoma, sans-serif; font-size: 19px;"><img src="footer%203.png" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></span></div>
+</div>
+<div v-else="">
+<div>
+<div class="holster">
+<div class="d-flex justify-content-center outline"><span style="font-family: tahoma, sans-serif; font-size: 19px;"><img src="csps-custom/square-breathing/assets/medias/outline.png" class="img-fluid" id="outline" alt=""></span></div>
+</div>
+<div class="controls d-flex justify-content-center mt-2"><span style="font-family: tahoma, sans-serif; font-size: 19px;"><button @click="togglePlay" :title="this.state" class="btn btn-primary fas" :class=" [this.state === 'Play' ? 'fa-play' : 'fa-stop'] " :aria-label="[this.state === 'Play' ? 'play' : 'stop']"></button></span></div>
+<div class="controls d-flex justify-content-center mt-2"><span style="font-family: tahoma, sans-serif; font-size: 19px;"><img src="footer%203.png" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></span></div>
+</div>
+</div>
+<span style="font-family: tahoma, sans-serif;"><!-- Content ends here --></span></div>
+</div>
+</div>
+</div>
+<p><span style="font-family: tahoma, sans-serif;"><!--Vue--></span></p>
+<p><span style="font-family: tahoma, sans-serif;">
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</span></p>
+<p><span style="font-family: tahoma, sans-serif;"><!-- Bootstrap
+    JavaScript: jQuery first, then Popper.js, then Bootstrap JS --></span></p>
+<p><span style="font-family: tahoma, sans-serif;">
+<script src="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/thirdpartylib/jquery/jquery-3.4.1.min.js"></script>
+<script src="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/thirdpartylib/popper-js/popper.min.js"></script>
+<script src="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/thirdpartylib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+</span></p>
+<p><span style="font-family: tahoma, sans-serif;"><!-- Template JavaScript --></span></p>
+<p><span style="font-family: tahoma, sans-serif;">
+<script src="/shared/LCS_HTML_Templates/CSPS_Template_2021/_assets/js/scripts.min.js"></script>
+</span></p>
+<p><span style="font-family: tahoma, sans-serif;"><!-- inject:js --></span></p>
+<p><span style="font-family: tahoma, sans-serif;">
+<script src="csps-custom/square-breathing/assets/js/csps-app.js"></script>
+</span></p>
+<p><span style="font-family: tahoma, sans-serif;"><!-- endinject --></span></p></body></html>

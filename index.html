@@ -163,21 +163,52 @@
 			// 			console.log(xmlInput);
 
 			let xmlUpload = document.querySelector('#upload_files');
+			let textInput = document.querySelector('#xml_loadurl');
 
 			xmlUpload.addEventListener('change', () => {
-				let files = event.target.files;
+				const file = event.target.files[0];
 
-				for (let i = 0; i < files.length; i++) {
-					let file = files[i];
-					let reader = new FileReader();
-
-					reader.addEventListener('load', (event) => {
-						let fileContents = event.target.result;
-						console.log(fileContents);
-					});
-
-					reader.readAsText(file);
+				// Check if the file is a ZIP file
+				if (
+					file.type !== 'application/zip' &&
+					file.type !== 'application/x-zip-compressed'
+				) {
+					console.log(file.type);
+					console.error('Selected file is not a ZIP file');
+					return;
 				}
+
+				// Read the contents of the ZIP file
+				const reader = new FileReader();
+
+				reader.addEventListener('load', (event) => {
+					const zipContents = event.target.result;
+
+					// Unzip the contents of the ZIP file
+					JSZip.loadAsync(zipContents)
+						.then((zip) => {
+							// Do something with the unzipped files
+							// textInput.setAttribute('value', zipContents);
+							zip.forEach((relativepath, fileName) => {
+								if (relativepath === 'imsmanifest.xml') {
+									textInput.setAttribute(
+										'value',
+										fileName.name,
+									);
+								}
+								// console.log(
+								// 	`path: ${relativepath}`,
+								// 	`fileName: ${fileName.name}`,
+								// );
+							});
+							// console.log(zip);
+						})
+						.catch((error) => {
+							console.error('Error unzipping file:', error);
+						});
+				});
+
+				reader.readAsArrayBuffer(file);
 			});
 			//Generate main index from XML data
 			function fGenIndex() {
@@ -658,14 +689,8 @@
 					}
 				});
 
-				/*$("img").each(function(){
-            if($(this).attr("width") && $(this).attr("width") != "" && $(this).attr("height") && $(this).attr("height") != ""){
-              $(this).removeAttr("height");
-            }
-          });
-
-          $(".float-left").removeClass("float-left");
-          $(".float-right").removeClass("float-right");*/
+				/*$("img").each(function(){ if($(this).attr("width") && $(this).attr("width") != "" && $(this).attr("height") && $(this).attr("height") != ""){$(this).removeAttr("height"); }});
+$(".float-left").removeClass("float-left");$(".float-right").removeClass("float-right");*/
 
 				//this function replaces select tags with their option values as p tags
 				//for each select tag in the page

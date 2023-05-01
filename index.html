@@ -166,7 +166,12 @@
 			let textInput = document.querySelector('#xml_loadurl');
 
 			xmlUpload.addEventListener('change', () => {
-				const file = event.target.files[0];
+				let file = event.target.files[0];
+				let folderName = file.name;
+				let extensionIndex = folderName.lastIndexOf('.');
+				if (extensionIndex !== -1) {
+					folderName = folderName.slice(0, extensionIndex);
+				}
 
 				// Check if the file is a ZIP file
 				if (
@@ -189,11 +194,22 @@
 						.then((zip) => {
 							// Do something with the unzipped files
 							// textInput.setAttribute('value', zipContents);
-							zip.forEach((relativepath, fileName) => {
+							zip.forEach(async (relativepath, fileName) => {
+								// Find extracted content
+								let fileContents = await fileName.async('blob');
+
+								// Create form data and attatch contents
+								let formData = new FormData();
+								formData.append(
+									'file',
+									fileContents,
+									fileName.name,
+								);
+								formData.append('directory', folderName);
 								if (relativepath === 'imsmanifest.xml') {
 									textInput.setAttribute(
 										'value',
-										fileName.name,
+										`${folderName}/${fileName.name}`,
 									);
 								}
 								// console.log(
@@ -628,6 +644,7 @@
 				var client = new XMLHttpRequest();
 				client.onload = fileLoadHandler;
 				client.open('GET', localUrl + '/imsmanifest.xml');
+				// client.open('GET', url);
 				client.send();
 			}
 
@@ -689,8 +706,14 @@
 					}
 				});
 
-				/*$("img").each(function(){ if($(this).attr("width") && $(this).attr("width") != "" && $(this).attr("height") && $(this).attr("height") != ""){$(this).removeAttr("height"); }});
-$(".float-left").removeClass("float-left");$(".float-right").removeClass("float-right");*/
+				/*$("img").each(function(){
+			         if($(this).attr("width") && $(this).attr("width") != "" && $(this).attr("height") && $(this).attr("height") != ""){
+			           $(this).removeAttr("height");
+			         }
+			       });
+
+			       $(".float-left").removeClass("float-left");
+			       $(".float-right").removeClass("float-right");*/
 
 				//this function replaces select tags with their option values as p tags
 				//for each select tag in the page

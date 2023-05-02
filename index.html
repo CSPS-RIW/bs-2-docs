@@ -163,10 +163,11 @@
 			// 			`;
 			// 			console.log(xmlInput);
 
-			let xmlUpload = document.querySelector('#upload_files');
+			// get file from device, set path name in text area
+			let uploadZipFile = document.querySelector('#upload_files');
 			let textInput = document.querySelector('#xml_loadurl');
 
-			xmlUpload.addEventListener('change', () => {
+			uploadZipFile.addEventListener('change', () => {
 				let file = event.target.files[0];
 				let folderName = file.name;
 				let extensionIndex = folderName.lastIndexOf('.');
@@ -207,26 +208,25 @@
 									fileName.name,
 								);
 								formData.append('directory', folderName);
-
 								// Send the file contents to the server using XHR
-								const client = new XMLHttpRequest();
-								client.open('GET', '/');
-								client.onreadystatechange = function () {
-									if (
-										client.readyState === 4 &&
-										client.status === 200
-									) {
-										console.log(
-											`File "${fileName.name}" uploaded successfully`,
-										);
-									} else if (client.readyState === 4) {
-										console.error(
-											`Error uploading file "${fileName.name}":`,
-											client.statusText,
-										);
-									}
-								};
-								client.send(formData);
+								// const client = new XMLHttpRequest();
+								// client.open('GET', '/');
+								// client.onreadystatechange = function () {
+								// 	if (
+								// 		client.readyState === 4 &&
+								// 		client.status === 200
+								// 	) {
+								// 		console.log(
+								// 			`File "${fileName.name}" uploaded successfully`,
+								// 		);
+								// 	} else if (client.readyState === 4) {
+								// 		console.error(
+								// 			`Error uploading file "${fileName.name}":`,
+								// 			client.statusText,
+								// 		);
+								// 	}
+								// };
+								// client.send(formData);
 
 								// create text value for Target XML URL input
 								if (relativepath === 'imsmanifest.xml') {
@@ -237,14 +237,18 @@
 								}
 							});
 							// TODO: Add fLoadXml to run here
+							// XMLHttpRequest starts
+							// XMLHttpRequest ends
 						})
 						.catch((error) => {
 							console.error('Error unzipping file:', error);
 						});
+					fLoadXml();
 				});
 
 				reader.readAsArrayBuffer(file);
 			});
+
 			//Generate main index from XML data
 			function fGenIndex() {
 				//
@@ -653,17 +657,41 @@
 
 			//Load XML manifest from input URL field
 			function fLoadXml() {
-				localUrl = +document
-					.getElementById('xml_loadurl')
-					.value.replace(/imsmanifest.xml/g, '');
+				let uploadZipFile = document.querySelector('#upload_files');
+				let textInput = document.querySelector('#xml_loadurl');
+				let file = uploadZipFile.files[0];
 
-				//Load via XMLHttpRequest for now
-				var client = new XMLHttpRequest();
-				client.onload = fileLoadHandler;
-				// Add localUrl to tweak it back to normal
-				client.open('GET', `${localUrl}/imsmanifest.xml`);
-				// client.open('GET', url);
-				client.send();
+				let folderName = file.name;
+				let extensionIndex = folderName.lastIndexOf('.');
+				if (extensionIndex !== -1) {
+					folderName = folderName.slice(0, extensionIndex);
+				}
+
+				// Check if the file is a ZIP file
+				if (
+					file.type !== 'application/zip' &&
+					file.type !== 'application/x-zip-compressed'
+				) {
+					console.log(file.type);
+					console.error('Selected file is not a ZIP file');
+					return;
+				}
+
+				var reader = new FileReader();
+				reader.onload = function (event) {
+					var zip = new JSZip();
+					zip.loadAsync(event.target.result).then(function (zip) {
+						zip.file('imsmanifest.xml')
+							.async('string')
+							.then(function (xmlData) {
+								// Load XML into textarea
+								$('#xml_input').val(xmlData);
+								// Also store it!
+								xmlManifest = xmlData;
+							});
+					});
+				};
+				reader.readAsArrayBuffer(file);
 			}
 
 			//Handle file loading
@@ -674,6 +702,32 @@
 					$('#xml_input').val(this.responseText);
 					//Also store it!
 					xmlManifest = this.responseText;
+
+					//Check if the loaded file is a zip file
+					if (
+						this.getResponseHeader('content-type') ===
+							'application/x-zip-compressed' ||
+						this.getResponseHeader('content-type') ===
+							'application/zip'
+					) {
+						// Unzip the file
+						var zip = new JSZip();
+						zip.loadAsync(this.response).then(function (zip) {
+							//Extract all files from the zip
+							zip.forEach(function (relativePath, zipEntry) {
+								if (!zipEntry.dir) {
+									//Read each file
+									zipEntry
+										.async('string')
+										.then(function (fileData) {
+											//Process the fileData
+											//For example, log the contents of the file to the console
+											console.log(fileData);
+										});
+								}
+							});
+						});
+					}
 				} else {
 					alert('Unable to load XML Manifest: ');
 					console.log('Unable to load XML Manifest: ' + this.status);

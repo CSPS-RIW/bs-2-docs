@@ -453,114 +453,76 @@
 
 			//Generate HTML from course content
 			function fGenHtml() {
-				//Remove index
-				$('#output').remove();
-				for (var i = 0; i < indexArr.length; i++) {
-					//Generate Module container
-					$('#generated_content').append(
-						'<div id="module_' + i + '"></div>',
-					);
+    $('#output').remove();
+    for (let i = 0; i < indexArr.length; i++) {
+        // Keep Module Title as H1
+        $('#generated_content').append(`<div id="module_${i}"><h1>${indexArr[i].title}</h1></div>`);
+        
+        for (let ii = 0; ii < indexArr[i].items.length; ii++) {
+            if (indexArr[i].items[ii].identifierref === undefined) continue;
 
-					for (var ii = 0; ii < indexArr[i].items.length; ii++) {
-						//Skip items without identifierref
-						if (indexArr[i].items[ii].identifierref == undefined) {
-							continue;
-						}
-						//Generate submodule container
-						$('#generated_content #module_' + i).append(
-							'<div id="item_' + ii + '"></div>',
-						);
-						//Register Html Resource for async loading handling
-						htmlResCounter++;
-						//Load content
-						fLoadHtml(
-							localUrl +
-								resArr[indexArr[i].items[ii].identifierref]
-									.files[0],
-							'#generated_content #module_' + i + ' #item_' + ii,
-						);
-					}
-				}
-				console.log(htmlResCounter + ' HTML files to be loaded...');
-			}
+            // Each page content will be loaded with H2 as the starting point for headings
+            $('#generated_content #module_' + i).append(
+                `<div id="item_${ii}"></div>`
+            );
+
+            htmlResCounter++;
+            fLoadHtml(
+                localUrl + resArr[indexArr[i].items[ii].identifierref].files[0],
+                '#generated_content #module_' + i + ' #item_' + ii
+            );
+        }
+    }
+    console.log(htmlResCounter + ' HTML files to be loaded...');
+}
+
 
 			//Load HTML into target element
 			function fLoadHtml(url, target) {
-				//Dev
-				var client = new XMLHttpRequest();
-				client.open('GET', url);
-				client.onreadystatechange = function () {
-					if (this.readyState == 4 && this.status == 200) {
-						//HTML placeholder
-						var htmlBuffer = '';
+    var client = new XMLHttpRequest();
+    client.open('GET', url);
+    client.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var htmlBuffer = '';
+            var el = $('<div></div>');
 
-						//Create inner element
-						var el = $('<div></div>');
+            // Extract body content only
+            if (client.responseText !== '') {
+                htmlBuffer = client.responseText.substring(
+                    client.responseText.indexOf('<body>'),
+                    client.responseText.indexOf('</body>')
+                );
+            }
 
-						//Register head meta links
-						var metaLinks = client.response.match(/<link.*>/g);
+            // Remove <script> tags
+            htmlBuffer = htmlBuffer.replace(/<script[^<]*<\/script>/g, '');
+            htmlBuffer = htmlBuffer.replace(/<script.*<\/script>/g, '');
 
-						//Loop through links (for external CSS and JS)
-						if (Array.isArray(metaLinks)) {
-							for (var i in metaLinks) {
-								//Modify link to reflect online URL
-								fPushCssIfNew(
-									'https://app.csps-efpc.gc.ca' +
-										metaLinks[i]
-											.split('href="')[1]
-											.split('"')[0],
-									cssArr,
-								);
-							}
-						} else {
-							console.log('metalink not an array?');
-						}
+            // Update relative src attributes
+            htmlBuffer = htmlBuffer.replace(
+                /src="/g,
+                'src="' + this.responseURL.substring(0, this.responseURL.lastIndexOf('/')) + '/'
+            );
 
-						//Strip Head, keep body only
-						if (client.responseText == '') {
-							console.log('client.responseText is blank, skip?');
-						} else {
-							htmlBuffer = client.responseText.substring(
-								client.responseText.indexOf('<body>'),
-								client.responseText.indexOf('</body>'),
-							);
-						}
+            el.html(htmlBuffer);
 
-						//Strip Script tags
-						htmlBuffer = htmlBuffer.replace(
-							/<script[^<]*<\/script>/g,
-							'',
-						);
-						htmlBuffer = htmlBuffer.replace(
-							/<script.*<\/script>/g,
-							'',
-						);
+            // Adjust each heading level by one, starting from H2 for page content
+            el.find('h1, h2, h3, h4, h5, h6').each(function () {
+                const currentLevel = parseInt(this.tagName.charAt(1));
+                const newLevel = Math.min(currentLevel + 1, 6);
+                $(this).replaceWith(`<h${newLevel}>${$(this).text()}</h${newLevel}>`);
+            });
 
-						//Modify SRC attributes to reflect offline structure
-						htmlBuffer = htmlBuffer.replace(
-							/src="/g,
-							'src="' +
-								this.responseURL.substring(
-									0,
-									this.responseURL.lastIndexOf('/'),
-								) +
-								'/',
-						);
+            $(target).append(el);
+            htmlLoadedResCounter++;
 
-						// el.html(client.responseText); //<-OLD
-						el.html(htmlBuffer);
+            fCheckIfResLoadingComplete();
+        }
+    };
+    client.send();
+}
 
-						$(target).append(el);
-						// $(target).append($('html', el));
 
-						htmlLoadedResCounter++;
-
-						//Check if everything is loaded
-						fCheckIfResLoadingComplete(); //<- should be called from all loaded script... create all load function
-					}
-				};
-				client.send();
-			}
 
 			//Load XML manifest from input URL field
 			function fLoadXml() {

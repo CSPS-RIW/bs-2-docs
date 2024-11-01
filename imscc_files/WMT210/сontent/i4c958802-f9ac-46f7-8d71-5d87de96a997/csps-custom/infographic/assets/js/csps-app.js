@@ -1,1 +1,0 @@
-window.addEventListener("DOMContentLoaded",(n=>{console.log("DOM fully loaded and parsed"),init()}));const init=()=>{};
